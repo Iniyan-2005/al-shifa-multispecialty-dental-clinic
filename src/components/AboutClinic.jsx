@@ -61,19 +61,19 @@ export default function AboutClinic({ onBookClick }) {
   }, []);
 
   return (
-    <section id="about" ref={sectionRef} className="section-pad bg-white relative">
+    <section id="about" ref={sectionRef} className="section-pad bg-white relative scroll-mt-20 sm:scroll-mt-24">
       <div className="container-custom">
 
         {/* Section Header */}
-        <div className="text-center mb-14">
-          <span className="badge bg-royal-100 text-royal-800 text-sm mb-3 border border-royal-200">
-            About Our Practice
+        <div className="max-w-3xl mb-14">
+          <span className="section-kicker">
+            Practice Leadership & Clinical Integrity
           </span>
-          <h2 className="section-title text-3xl md:text-4xl">
-            Welcome to Al-Shifa Multispecialty Dental Clinic
+          <h2 className="section-title text-3xl sm:text-4xl md:text-5xl">
+            Specialist Care Rooted in Conservative Dentistry
           </h2>
-          <p className="text-slate-500 mt-3 max-w-2xl mx-auto text-base">
-            அல்-ஷிஃபா பல் சிகிச்சையகம் — Combining specialized clinical expertise with warm, patient-first dental care in Pudupet, Egmore.
+          <p className="text-slate-600 mt-3 text-base sm:text-lg leading-relaxed">
+            அல்-ஷிஃபா பல் சிகிச்சையகம் — Combining advanced Endodontic & Laser training with a warm, patient-first philosophy in Pudupet, Egmore.
           </p>
         </div>
 
@@ -82,23 +82,45 @@ export default function AboutClinic({ onBookClick }) {
           {/* Left: Text side */}
           <div ref={textRef} className="space-y-6">
 
-            {/* Doctor Highlight Box */}
-            <div className="bg-royal-50/70 border-l-4 border-royal-800 rounded-r-2xl p-5 shadow-sm">
-              <div className="flex items-center gap-2 mb-1">
-                <span className="badge bg-gold-500 text-slate-950 font-bold text-[11px]">
-                  CHIEF DENTAL SPECIALIST
+            {/* Doctor Credential Architecture */}
+            <div className="bg-royal-50/80 border border-royal-200/80 rounded-2xl p-6 shadow-sm space-y-4">
+              <div className="flex items-center justify-between gap-2 flex-wrap">
+                <span className="badge bg-gold-500 text-slate-950 font-bold text-[11px] tracking-wide">
+                  PRACTICE DIRECTOR & SPECIALIST
                 </span>
-                <span className="text-xs text-royal-800 font-semibold">Reg: 33541</span>
+                <span className="text-xs text-royal-900 font-mono font-bold bg-white px-2.5 py-1 rounded-md border border-royal-200">
+                  TNDC Reg: 33541
+                </span>
               </div>
-              <h3 className="text-xl sm:text-2xl font-display font-black text-royal-950">
-                {clinicData.doctor.name}
-              </h3>
-              <p className="text-sm font-bold text-gold-700 mt-0.5">
-                {clinicData.doctor.degree} · {clinicData.doctor.specialty}
-              </p>
-              <p className="text-xs text-slate-600 mt-2 leading-relaxed">
-                Alumna of the Government Dental College, VNR. Specialized in painless single-sitting microscopic root canal therapy and advanced laser applications.
-              </p>
+
+              <div>
+                <h3 className="text-2xl font-display font-black text-royal-950">
+                  {clinicData.doctor.name}
+                </h3>
+                <p className="text-sm font-semibold text-gold-700 mt-0.5">
+                  {clinicData.doctor.degree} · {clinicData.doctor.specialty}
+                </p>
+              </div>
+
+              {/* 4-Item Credential Matrix */}
+              <div className="grid grid-cols-2 gap-2.5 pt-1 text-xs">
+                <div className="bg-white p-3 rounded-xl border border-royal-100">
+                  <p className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Institution</p>
+                  <p className="font-semibold text-slate-900 mt-0.5">Govt Dental College, VNR</p>
+                </div>
+                <div className="bg-white p-3 rounded-xl border border-royal-100">
+                  <p className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Clinical Discipline</p>
+                  <p className="font-semibold text-slate-900 mt-0.5">Microscopic Endodontics</p>
+                </div>
+                <div className="bg-white p-3 rounded-xl border border-royal-100">
+                  <p className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Laser Surgery</p>
+                  <p className="font-semibold text-slate-900 mt-0.5">Soft-Tissue Diode Laser</p>
+                </div>
+                <div className="bg-white p-3 rounded-xl border border-royal-100">
+                  <p className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Patient Standard</p>
+                  <p className="font-semibold text-slate-900 mt-0.5">100% Pain-Free Protocols</p>
+                </div>
+              </div>
             </div>
 
             <p className="text-slate-600 leading-relaxed text-base">
@@ -152,78 +174,67 @@ export default function AboutClinic({ onBookClick }) {
 
           {/* Right: Clinic Exterior / Signboard Photo */}
           <div ref={imageRef} className="relative">
-            <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-slate-100 bg-slate-900 group">
+            <div className="rounded-3xl overflow-hidden shadow-xl border border-slate-200/80 bg-slate-900">
               <img
                 src="/clinic-front.jpg"
                 alt="Al-Shifa Multispecialty Dental Clinic Exterior Signboard - Dr. Afreen Jannath"
-                className="w-full h-80 sm:h-96 md:h-[460px] object-cover group-hover:scale-105 transition-transform duration-700"
+                className="w-full h-80 sm:h-96 md:h-[460px] object-cover"
               />
 
-              {/* Bottom glass card displaying official street details */}
-              <div className="absolute bottom-4 left-4 right-4 bg-royal-950/90 backdrop-blur-md rounded-2xl p-4 border border-royal-700/50 text-white">
+              {/* Clean Bottom Caption Bar */}
+              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-royal-950/90 via-royal-950/60 to-transparent p-5 sm:p-6 text-white">
                 <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-gold-500/20 text-gold-400 flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-gold-500/20 text-gold-400 flex items-center justify-center flex-shrink-0 mt-0.5">
                     <MapPin size={20} />
                   </div>
                   <div>
                     <p className="font-display font-bold text-sm text-white">
-                      Al-Shifa Multispecialty Dental Clinic
+                      Physical Practice Location
                     </p>
                     <p className="text-xs text-royal-200 mt-0.5">
-                      {clinicData.contact.shortAddress}
-                    </p>
-                    <p className="text-[11px] text-gold-300 mt-1 font-semibold">
-                      📞 Appointment Contact: {clinicData.contact.displayPhone1}
+                      {clinicData.contact.shortAddress} · Call {clinicData.contact.displayPhone1}
                     </p>
                   </div>
                 </div>
               </div>
             </div>
-
-            {/* Floating Specialist Badge */}
-            <div className="absolute -top-4 -left-3 sm:-top-5 sm:-left-5 bg-white rounded-2xl p-3.5 shadow-xl border border-royal-100">
-              <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-xl bg-royal-800 text-white flex items-center justify-center font-bold">
-                  <Sparkles size={18} />
-                </div>
-                <div>
-                  <p className="text-xs font-bold text-royal-950">Govt Dental College Alumna</p>
-                  <p className="text-[11px] text-gold-700 font-semibold">Endodontist & Laser Specialist</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Floating Hours Badge */}
-            <div className="absolute -bottom-4 -right-3 sm:-bottom-5 sm:-right-5 bg-white rounded-2xl px-4 py-2.5 shadow-xl border border-royal-100 text-center">
-              <p className="text-[11px] text-slate-500 font-medium">Evening Clinic</p>
-              <p className="text-xs font-bold text-royal-900">Open till 9:00 PM</p>
-            </div>
-
           </div>
 
         </div>
 
-        {/* 4 Feature Cards */}
-        <div ref={featuresRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-16 sm:mt-20">
-          {clinicData.features.map((feature) => {
-            const Icon = iconMap[feature.icon] || CheckCircle;
-            return (
+        {/* 4 Clinical Standards Pillars */}
+        <div ref={featuresRef} className="mt-20 pt-12 border-t border-slate-200">
+          <div className="flex items-center justify-between mb-8">
+            <span className="section-kicker mb-0">Clinical Operating Standards</span>
+            <span className="text-xs font-mono font-bold text-slate-400">STANDARDS 01–04</span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {clinicData.features.map((feature, idx) => (
               <div
                 key={feature.title}
-                className="card p-6 hover:-translate-y-1.5 transition-all duration-300 border border-slate-100 hover:border-royal-200 text-center flex flex-col items-center"
+                className="space-y-3 relative border-l border-slate-200 pl-5 sm:pl-6"
               >
-                <div className="w-12 h-12 bg-royal-100 rounded-2xl flex items-center justify-center mb-4 text-royal-800">
-                  <Icon size={24} />
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-xs font-bold text-gold-700 tracking-wider">
+                    0{idx + 1}
+                  </span>
+                  <div className="w-8 h-8 rounded-lg bg-royal-50 text-royal-800 flex items-center justify-center">
+                    {idx === 0 && <CheckCircle size={16} />}
+                    {idx === 1 && <Award size={16} />}
+                    {idx === 2 && <Zap size={16} />}
+                    {idx === 3 && <Heart size={16} />}
+                  </div>
                 </div>
-                <h3 className="font-display font-bold text-slate-900 text-base mb-2">
+                <h3 className="font-display font-bold text-slate-900 text-base leading-snug">
                   {feature.title}
                 </h3>
-                <p className="text-slate-500 text-sm leading-relaxed">
+                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
                   {feature.description}
                 </p>
               </div>
-            );
-          })}
+            ))}
+          </div>
         </div>
 
       </div>

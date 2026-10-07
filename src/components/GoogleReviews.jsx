@@ -1,87 +1,10 @@
 import React, { useEffect, useRef } from 'react';
-import { Star, ExternalLink, ThumbsUp, ShieldCheck } from 'lucide-react';
+import { Star, ExternalLink, Check, Quote } from 'lucide-react';
 import { clinicData } from '../data/clinicData';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
-
-function StarRating({ rating }) {
-  return (
-    <div className="flex gap-0.5">
-      {[1, 2, 3, 4, 5].map((i) => (
-        <Star
-          key={i}
-          size={15}
-          className={i <= rating ? 'star-filled' : 'text-slate-200 fill-slate-200'}
-        />
-      ))}
-    </div>
-  );
-}
-
-function ReviewCard({ review, index }) {
-  const avatarColors = [
-    'bg-royal-800',
-    'bg-gold-600',
-    'bg-cyan-700',
-    'bg-royal-700',
-    'bg-amber-600',
-    'bg-blue-700',
-  ];
-  const color = avatarColors[index % avatarColors.length];
-
-  return (
-    <div
-      className={`card p-6 flex flex-col justify-between border-2 transition-all duration-300 hover:shadow-xl ${
-        review.highlight
-          ? 'border-gold-300 bg-gradient-to-b from-gold-50/40 to-white'
-          : 'border-slate-100 hover:border-royal-200'
-      }`}
-    >
-      <div>
-        {/* Top User Info */}
-        <div className="flex items-start gap-3 mb-3">
-          <div
-            className={`w-11 h-11 ${color} text-white rounded-full flex items-center justify-center font-bold text-base flex-shrink-0 shadow-sm`}
-          >
-            {review.name[0]}
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 flex-wrap">
-              <p className="font-bold text-slate-900 text-sm">{review.name}</p>
-              {review.verified && (
-                <span className="badge bg-emerald-100 text-emerald-800 text-[10px] px-2 py-0.2">
-                  ✓ Google Verified
-                </span>
-              )}
-            </div>
-            <p className="text-[11px] text-slate-400 mt-0.5">{review.date}</p>
-          </div>
-        </div>
-
-        {/* Stars */}
-        <div className="mb-3">
-          <StarRating rating={review.rating} />
-        </div>
-
-        {/* Review Content */}
-        <p className="text-slate-600 text-sm leading-relaxed italic">
-          "{review.text}"
-        </p>
-      </div>
-
-      {/* Helpful tag */}
-      <div className="flex items-center justify-between text-xs text-slate-400 pt-4 mt-4 border-t border-slate-100">
-        <div className="flex items-center gap-1.5">
-          <ThumbsUp size={12} className="text-royal-600" />
-          <span>Verified Patient Experience</span>
-        </div>
-        <span className="text-[11px] font-semibold text-gold-700">5.0 ★★★★★</span>
-      </div>
-    </div>
-  );
-}
 
 export default function GoogleReviews() {
   const sectionRef = useRef(null);
@@ -92,11 +15,11 @@ export default function GoogleReviews() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         headerRef.current,
-        { y: 30, opacity: 0 },
+        { y: 25, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.7,
+          duration: 0.6,
           ease: 'power3.out',
           scrollTrigger: { trigger: sectionRef.current, start: 'top 80%' },
         }
@@ -104,12 +27,12 @@ export default function GoogleReviews() {
 
       gsap.fromTo(
         Array.from(gridRef.current.children),
-        { y: 40, opacity: 0 },
+        { y: 30, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.6,
-          stagger: 0.1,
+          duration: 0.5,
+          stagger: 0.08,
           ease: 'power2.out',
           scrollTrigger: { trigger: gridRef.current, start: 'top 80%' },
         }
@@ -120,66 +43,93 @@ export default function GoogleReviews() {
   }, []);
 
   return (
-    <section id="reviews" ref={sectionRef} className="section-pad bg-white relative">
+    <section id="reviews" ref={sectionRef} className="section-pad bg-[#FAFCFD] border-b border-slate-200/60 relative scroll-mt-20 sm:scroll-mt-24">
       <div className="container-custom">
 
         {/* Section Header */}
-        <div ref={headerRef} className="text-center mb-12 sm:mb-16">
-          <span className="badge bg-gold-100 text-gold-900 border border-gold-300 text-sm mb-3">
-            ⭐ 5.0 Star Reputation
-          </span>
-          <h2 className="section-title text-3xl md:text-4xl">
-            What Our Patients Say
-          </h2>
-          <p className="text-slate-500 mt-3 max-w-xl mx-auto text-base">
-            Verified patient reviews highlighting painless treatments, genuine care, and exceptional results with Dr. Afreen Jannath.
-          </p>
+        <div ref={headerRef} className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+          <div className="max-w-2xl">
+            <span className="section-kicker">
+              Verified Patient Experience
+            </span>
+            <h2 className="section-title text-3xl sm:text-4xl md:text-5xl">
+              Real Stories of Painless Care
+            </h2>
+            <p className="text-slate-600 mt-3 text-base sm:text-lg">
+              Patients across Pudupet, Egmore, and Chennai share their experience with Dr. Afreen Jannath’s endodontic and laser procedures.
+            </p>
+          </div>
 
-          {/* Aggregate Badge */}
-          <div className="inline-flex items-center gap-4 bg-royal-50 border border-royal-200/80 rounded-2xl px-6 py-3 mt-6 shadow-sm">
-            <div className="text-3xl font-display font-black text-royal-950">
+          {/* High-Trust Google Anchor */}
+          <div className="flex-shrink-0 bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-xs flex items-center gap-4">
+            <div className="text-3xl font-display font-black text-slate-950">
               5.0
             </div>
-            <div className="text-left">
-              <div className="flex gap-1">
+            <div>
+              <div className="flex gap-0.5 text-amber-500">
                 {[1, 2, 3, 4, 5].map((i) => (
-                  <Star key={i} size={16} className="star-filled" />
+                  <Star key={i} size={15} className="fill-amber-400 text-amber-400" />
                 ))}
               </div>
               <p className="text-xs font-semibold text-slate-600 mt-0.5">
-                Based on 18 Verified Google Reviews
+                18 Google Reviews
               </p>
             </div>
             <a
               href={clinicData.googleProfile}
               target="_blank"
               rel="noreferrer"
-              className="ml-2 btn-gold text-xs px-3.5 py-1.5 flex items-center gap-1 shadow-sm"
+              className="btn-outline text-xs px-3 py-1.5 whitespace-nowrap ml-2"
             >
-              <span>View Profile</span>
+              <span>Verify on Maps</span>
               <ExternalLink size={12} />
             </a>
           </div>
         </div>
 
-        {/* Reviews Grid */}
+        {/* Testimonials Grid with Editorial Typographic Focus */}
         <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {clinicData.reviews.map((review, i) => (
-            <ReviewCard key={review.name} review={review} index={i} />
-          ))}
-        </div>
+            <div
+              key={review.name}
+              className="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200/80 shadow-xs flex flex-col justify-between hover:border-royal-300 transition-colors"
+            >
+              <div>
+                {/* Header with name and rating */}
+                <div className="flex items-center justify-between gap-3 mb-4">
+                  <div className="flex items-center gap-2">
+                    <div className="w-9 h-9 rounded-full bg-royal-900 text-white flex items-center justify-center font-bold text-xs">
+                      {review.name[0]}
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-slate-900 text-sm">
+                        {review.name}
+                      </h4>
+                      <p className="text-[11px] text-slate-400">{review.date}</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-0.5 text-amber-400">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Star key={star} size={13} className="fill-amber-400 text-amber-400" />
+                    ))}
+                  </div>
+                </div>
 
-        {/* Bottom Google Profile CTA */}
-        <div className="text-center mt-12">
-          <a
-            href={clinicData.googleProfile}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 text-royal-800 hover:text-royal-950 font-bold text-sm bg-slate-50 hover:bg-slate-100 px-6 py-3 rounded-full transition-colors border border-slate-200 shadow-sm"
-          >
-            <span>Read all reviews on Google Maps</span>
-            <ExternalLink size={15} />
-          </a>
+                {/* Review Text */}
+                <p className="text-slate-700 text-sm leading-relaxed">
+                  "{review.text}"
+                </p>
+              </div>
+
+              {/* Verified Attribution Footer */}
+              <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <span className="flex items-center gap-1 text-emerald-700 font-semibold text-[11px]">
+                  <Check size={13} className="stroke-[3]" /> Google Verified Patient
+                </span>
+                <span className="text-[11px] text-slate-400">Pudupet Clinic</span>
+              </div>
+            </div>
+          ))}
         </div>
 
       </div>

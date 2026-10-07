@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -11,7 +11,7 @@
     max-width: 100vw;
   }
   body {
-    @apply font-sans text-slate-800 bg-dental-cream antialiased;
+    @apply font-sans text-slate-800 bg-dental-cream antialiased selection:bg-gold-500 selection:text-slate-950;
     overflow-x: hidden;
     max-width: 100vw;
     width: 100%;
@@ -19,29 +19,42 @@
   * {
     @apply box-border;
   }
+  h1, h2, h3, h4 {
+    letter-spacing: -0.025em;
+  }
 }
 
 @layer components {
+  /* Primary Action Button - Highest visual weight */
   .btn-primary {
-    @apply bg-royal-800 hover:bg-royal-900 text-white font-semibold px-6 py-3 rounded-full transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 inline-flex items-center gap-2;
+    @apply bg-royal-800 hover:bg-royal-950 text-white font-bold px-7 py-3.5 rounded-full transition-all duration-200 shadow-md shadow-royal-950/15 hover:shadow-xl hover:shadow-royal-950/25 hover:-translate-y-0.5 active:translate-y-0 inline-flex items-center justify-center gap-2.5 text-sm sm:text-base cursor-pointer;
   }
+  /* Accent Gold Button - High conversion highlight */
   .btn-gold {
-    @apply bg-gold-500 hover:bg-gold-600 text-slate-950 font-semibold px-6 py-3 rounded-full transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 inline-flex items-center gap-2;
+    @apply bg-gold-500 hover:bg-gold-600 text-slate-950 font-extrabold px-7 py-3.5 rounded-full transition-all duration-200 shadow-md shadow-gold-500/20 hover:shadow-xl hover:shadow-gold-500/30 hover:-translate-y-0.5 active:translate-y-0 inline-flex items-center justify-center gap-2.5 text-sm sm:text-base cursor-pointer;
   }
+  /* Secondary Button - Low visual friction, clear pairing */
+  .btn-secondary {
+    @apply bg-white hover:bg-royal-50/80 text-royal-900 font-semibold px-6 py-3.5 rounded-full border border-royal-200/80 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 inline-flex items-center justify-center gap-2 text-sm sm:text-base shadow-sm hover:border-royal-300 cursor-pointer;
+  }
+  /* Subtle Outline Button */
   .btn-outline {
-    @apply border-2 border-royal-800 text-royal-800 hover:bg-royal-800 hover:text-white font-semibold px-6 py-3 rounded-full transition-all duration-300 inline-flex items-center gap-2;
+    @apply border border-royal-800 text-royal-800 hover:bg-royal-800 hover:text-white font-semibold px-6 py-2.5 rounded-full transition-all duration-200 inline-flex items-center justify-center gap-2 text-xs sm:text-sm cursor-pointer;
   }
   .section-title {
-    @apply font-display font-bold text-slate-900 leading-tight;
+    @apply font-display font-extrabold text-slate-950 tracking-tight leading-[1.15];
+  }
+  .section-kicker {
+    @apply text-xs font-bold uppercase tracking-widest text-gold-700 block mb-2.5;
   }
   .card {
-    @apply bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300;
+    @apply bg-white rounded-2xl shadow-sm hover:shadow-md border border-slate-200/80 transition-all duration-200;
   }
   .badge {
-    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold;
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-bold tracking-wide;
   }
   .section-pad {
-    @apply py-16 md:py-24;
+    @apply py-20 lg:py-28;
   }
   .container-custom {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;

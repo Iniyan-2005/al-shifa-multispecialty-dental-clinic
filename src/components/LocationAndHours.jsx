@@ -41,19 +41,19 @@ export default function LocationAndHours() {
   }, []);
 
   return (
-    <section id="location" ref={sectionRef} className="section-pad bg-royal-50/50 relative">
+    <section id="location" ref={sectionRef} className="section-pad bg-[#FAFCFD] border-b border-slate-200/60 relative scroll-mt-20 sm:scroll-mt-24">
       <div className="container-custom">
 
         {/* Section Header */}
-        <div className="text-center mb-12 sm:mb-16">
-          <span className="badge bg-royal-100 text-royal-800 border border-royal-200 text-sm mb-3">
-            📍 Visit Our Clinic
+        <div className="max-w-3xl mb-14">
+          <span className="section-kicker">
+            Practice Location & Consultation Hours
           </span>
-          <h2 className="section-title text-3xl md:text-4xl">
-            Location & Working Hours
+          <h2 className="section-title text-3xl sm:text-4xl md:text-5xl">
+            How to Reach Al-Shifa Dental Clinic
           </h2>
-          <p className="text-slate-500 mt-3 text-base max-w-xl mx-auto">
-            Conveniently situated in Pudupet, Egmore, Chennai. Easily reachable from Mount Road, Egmore Station, and Central.
+          <p className="text-slate-600 mt-3 text-base sm:text-lg">
+            Centrally situated on Labbai Street, Pudupet (Egmore, Chennai) with dedicated evening hours open daily till 9:00 PM.
           </p>
         </div>
 
@@ -61,7 +61,7 @@ export default function LocationAndHours() {
 
           {/* Left: Google Map Embed & Directions */}
           <div ref={leftRef} className="space-y-6">
-            <div className="rounded-3xl overflow-hidden shadow-xl border-4 border-white bg-slate-100 relative">
+            <div className="rounded-3xl overflow-hidden shadow-xl border-4 border-white bg-slate-100 relative group">
               <iframe
                 title="Al-Shifa Multispecialty Dental Clinic Map"
                 src="https://maps.google.com/maps?q=Al-Shifa+Multispecialty+Dental+clinic,+23%2F11,+Labbai+St,+Pudupet,+Komaleeswaranpet,+Egmore,+Chennai,+Tamil+Nadu+600002&t=&z=17&ie=UTF8&iwloc=&output=embed"
@@ -71,12 +71,24 @@ export default function LocationAndHours() {
                 allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
+                className="pointer-events-none sm:pointer-events-auto"
               />
 
               <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-xl shadow-md text-xs font-bold text-royal-950 flex items-center gap-1.5 border border-royal-100">
                 <Navigation size={13} className="text-royal-700" />
                 <span>Pudupet, Egmore</span>
               </div>
+
+              {/* Direct Open in Maps Pill */}
+              <a
+                href={clinicData.contact.googleMapsUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="absolute bottom-3 right-3 bg-royal-950/90 hover:bg-royal-900 text-white backdrop-blur-md px-3.5 py-1.5 rounded-xl shadow-lg text-xs font-bold flex items-center gap-1.5 border border-royal-700 transition-all hover:scale-105"
+              >
+                <Compass size={13} className="text-gold-400" />
+                <span>Open in Google Maps</span>
+              </a>
             </div>
 
             {/* Address Details Card */}

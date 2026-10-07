@@ -70,12 +70,13 @@ export default function FloatingActions({ onBookClick }) {
       </button>
 
       {/* 2. Main WhatsApp Floating Button */}
-      <div className="relative">
+      <div className="relative group">
         <a
           href={whatsappUrl}
           target="_blank"
           rel="noreferrer"
-          aria-label="Chat on WhatsApp"
+          aria-label="Chat on WhatsApp with Dr. Afreen Jannath"
+          title="Chat on WhatsApp with Dr. Afreen Jannath (+91 94986 58545)"
           className="w-14 h-14 bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 whatsapp-pulse"
         >
           <MessageCircle size={28} />
