@@ -14,6 +14,28 @@ export default function Navbar({ onBookClick }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Auto-close mobile menu on page scroll or Escape key press
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+
+    const handleScrollClose = () => {
+      setMobileMenuOpen(false);
+    };
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScrollClose, { passive: true });
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('scroll', handleScrollClose);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [mobileMenuOpen]);
+
   const navLinks = [
     { label: 'Home', href: '#home' },
     { label: 'About Doctor', href: '#about' },
@@ -68,7 +90,11 @@ export default function Navbar({ onBookClick }) {
       >
         <div className="container-custom flex items-center justify-between">
           {/* Logo brand */}
-          <a href="#home" className="flex items-center gap-3 group">
+          <a
+            href="#home"
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center gap-3 group"
+          >
             <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl overflow-hidden shadow-md group-hover:scale-105 transition-transform border border-gold-500/30 flex-shrink-0 bg-royal-950">
               <img
                 src="/logo.svg"
@@ -107,8 +133,8 @@ export default function Navbar({ onBookClick }) {
             ))}
           </nav>
 
-          {/* Right Action buttons */}
-          <div className="hidden sm:flex items-center gap-3">
+          {/* Right Action buttons (Desktop) */}
+          <div className="hidden lg:flex items-center gap-3">
             <a
               href={`tel:${clinicData.contact.phone1}`}
               className="flex items-center gap-2 text-royal-800 hover:text-royal-900 px-3 py-2 rounded-full hover:bg-royal-50 transition-colors text-sm font-semibold"
@@ -128,19 +154,21 @@ export default function Navbar({ onBookClick }) {
             </button>
           </div>
 
-          {/* Mobile hamburger button */}
-          <div className="flex sm:hidden items-center gap-2">
+          {/* Mobile / Tablet hamburger button */}
+          <div className="flex lg:hidden items-center gap-2">
             <a
               href={`tel:${clinicData.contact.phone1}`}
-              className="p-2 rounded-lg bg-royal-50 text-royal-800"
+              onClick={() => setMobileMenuOpen(false)}
+              className="p-2 rounded-lg bg-royal-50 text-royal-800 hover:bg-royal-100 transition-colors"
               aria-label="Call clinic"
             >
               <Phone size={18} />
             </a>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-slate-700 hover:bg-slate-100"
+              className="p-2 rounded-lg text-slate-700 hover:bg-slate-100 transition-colors"
               aria-label="Toggle navigation menu"
+              aria-expanded={mobileMenuOpen}
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -149,19 +177,19 @@ export default function Navbar({ onBookClick }) {
 
         {/* Mobile Dropdown Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden bg-white border-t border-slate-100 px-4 pt-4 pb-6 shadow-xl animate-fade-in-up">
-            <div className="flex flex-col gap-3">
+          <div className="lg:hidden relative z-50 bg-white border-t border-slate-100 px-4 pt-4 pb-6 shadow-2xl animate-fade-in-up">
+            <div className="flex flex-col gap-1.5">
               {navLinks.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-base font-medium text-slate-700 hover:text-royal-800 py-1.5 border-b border-slate-50"
+                  className="text-base font-semibold text-slate-700 hover:text-royal-900 py-2.5 px-3 rounded-xl hover:bg-royal-50 transition-colors border-b border-slate-50 last:border-b-0"
                 >
                   {link.label}
                 </a>
               ))}
-              <div className="pt-2 flex flex-col gap-2.5">
+              <div className="pt-3 flex flex-col gap-2.5 border-t border-slate-100 mt-2">
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);
@@ -175,7 +203,8 @@ export default function Navbar({ onBookClick }) {
                   href={`https://wa.me/${clinicData.contact.whatsappNumber}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center justify-center gap-2 bg-[#25D366] text-white py-3 rounded-full font-semibold text-sm"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white py-3 rounded-full font-semibold text-sm transition-colors shadow-sm"
                 >
                   <MessageCircle size={16} /> WhatsApp Us
                 </a>
@@ -184,6 +213,15 @@ export default function Navbar({ onBookClick }) {
           </div>
         )}
       </header>
+
+      {/* Backdrop overlay: tapping outside automatically closes the mobile menu */}
+      {mobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-slate-950/40 backdrop-blur-xs z-40 lg:hidden"
+          onClick={() => setMobileMenuOpen(false)}
+          aria-hidden="true"
+        />
+      )}
     </div>
   );
 }
